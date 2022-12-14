@@ -1,0 +1,43 @@
+# 感谢使用 AcceptTermsOfService
+# Made By DongShaoNB
+
+# 配置文件说明:
+# slot(格子) 只能为 0-8 其他数字会报错 第一个格子为0 以此类推
+# 默认配置文件下 条款的方块是有lore选项的 不可取消 因为条款用lore显示 取消了就没有意义了
+# 当然 你把条款的方块的lore删除了插件也会从默认配置读取
+# 同意和拒绝方块也有lore选项，但默认配置文件没有，可以自己加上，请按照yaml格式添加
+# 颜色代码用 &
+
+# 讨论QQ群: 159323818
+
+
+gui:
+  # GUI的标题
+  title: '&a&l欢迎来到 XXX 服务器'
+  terms:
+    # 服务条款显示的方块ID
+    blockid: BEDROCK
+    # 显示的方块的名字
+    name: '&6&l服务条款'
+    # 在哪个格子
+    slot: 0
+    # 物品lore
+    lore:
+      - "&21.田所浩二"
+      - "&22.野兽先辈"
+      - "&23.114514"
+      - "&24.1919810"
+  accept:
+    # 同意条款显示的方块ID
+    blockid: GREEN_WOOL
+    # 显示的方块的名字
+    name: '&2&l同意'
+    # 在哪个格子
+    slot: 7
+  reject:
+    # 拒绝条款显示的方块ID
+    blockid: RED_WOOL
+    # 显示的方块的名字
+    name: '&4&l拒绝'
+    # 在哪个格子
+    slot: 8

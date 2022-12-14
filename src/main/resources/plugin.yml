@@ -1,0 +1,10 @@
+name: AcceptTermsOfService
+version: '${project.version}'
+main: cn.dsnbo.accepttermsofservice.AcceptTermsOfService
+api-version: 1.13
+authors: [ DongShaoNB ]
+description: AcceptTermsOfService
+website: www.dsnbo.cn
+commands:
+  atos:
+    description: "AcceptTermsOfService Main Command"
