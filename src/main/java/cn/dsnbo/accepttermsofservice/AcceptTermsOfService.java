@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 public final class AcceptTermsOfService extends JavaPlugin implements Listener {
 
     public static String Version = "1.0";
-
     public static Plugin Plugin;
     private final String[] SubCommands = {"help", "reload", "version"};
     public FileConfiguration Message;
