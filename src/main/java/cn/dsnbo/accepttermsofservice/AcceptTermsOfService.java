@@ -42,7 +42,7 @@ public final class AcceptTermsOfService extends JavaPlugin implements Listener {
         Plugin = AcceptTermsOfService.getProvidingPlugin(AcceptTermsOfService.class);
         Bukkit.getPluginManager().registerEvents(this, this);
         new Metrics(this, 17068);
-        getLogger().info("感谢选择使用本插件，作者: DongShaoNB");
+        getLogger().info("感谢选择使用本插件，作者: DongShaoNB，QQ群: 159323818");
     }
 
     private void loadConfig() {
