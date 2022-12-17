@@ -5,6 +5,8 @@ api-version: 1.13
 authors: [ DongShaoNB ]
 description: AcceptTermsOfService
 website: www.dsnbo.cn
+softdepend:
+  - AuthMe
 commands:
   atos:
     description: "AcceptTermsOfService Main Command"

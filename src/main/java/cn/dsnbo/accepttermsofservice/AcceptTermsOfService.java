@@ -1,5 +1,6 @@
 package cn.dsnbo.accepttermsofservice;
 
+import fr.xephi.authme.events.LoginEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -12,7 +13,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -30,8 +30,9 @@ public final class AcceptTermsOfService extends JavaPlugin implements Listener {
     public static Plugin Plugin;
     private final String[] SubCommands = {"help", "reload", "version"};
     public FileConfiguration Message;
-    public FileConfiguration DataF;
+    public static FileConfiguration DataF;
     public final Set<Player> playerHashSet = new HashSet<>();
+    public boolean isAuthmeEnabled;
 
 
     @Override
@@ -39,9 +40,16 @@ public final class AcceptTermsOfService extends JavaPlugin implements Listener {
         loadConfig();
         loadCommand();
         Plugin = AcceptTermsOfService.getProvidingPlugin(AcceptTermsOfService.class);
+        isAuthmeEnabled = !(Bukkit.getPluginManager().getPlugin("Authme") == null);
+        if (isAuthmeEnabled) {
+            Bukkit.getPluginManager().registerEvents(new AuthmeListener(), this);
+        } else {
+            Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        }
         Bukkit.getPluginManager().registerEvents(this, this);
         new Metrics(this, 17068);
         getLogger().info("感谢选择使用本插件，作者: DongShaoNB，QQ群: 159323818");
+
     }
 
     private void loadConfig() {
@@ -77,51 +85,6 @@ public final class AcceptTermsOfService extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
 
-    }
-
-    @EventHandler
-    public void PlayerJoinEvent(PlayerJoinEvent e) {
-        Player player = e.getPlayer();
-        if (!this.DataF.getBoolean(String.valueOf(player.getUniqueId()))) {
-            Inventory inventory = Bukkit.createInventory(player, 9, ChatColor.translateAlternateColorCodes('&', getConfig().getString("gui.title")));
-            ItemStack termsItemStack = new ItemStack(Material.getMaterial(getConfig().getString("gui.terms.blockid")));
-            ItemMeta termsItemMeta = termsItemStack.getItemMeta();
-            termsItemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', getConfig().getString("gui.terms.name")));
-
-            List<String> termsItemLore = getConfig().getStringList("gui.terms.lore");
-            termsItemLore.replaceAll(textToTranslate -> ChatColor.translateAlternateColorCodes('&', textToTranslate));
-            termsItemMeta.setLore(termsItemLore);
-
-            int termsItemStackSlot = getConfig().getInt("gui.terms.slot");
-            termsItemStack.setItemMeta(termsItemMeta);
-            inventory.setItem(termsItemStackSlot, termsItemStack);
-
-            ItemStack acceptItemStack = new ItemStack(Material.getMaterial(getConfig().getString("gui.accept.blockid")));
-            ItemMeta acceptItemMeta = acceptItemStack.getItemMeta();
-            if (!getConfig().getStringList("gui.accept.lore").isEmpty()) {
-                List<String> acceptItemLore = getConfig().getStringList("gui.accept.lore");
-                acceptItemLore.replaceAll(textToTranslate -> ChatColor.translateAlternateColorCodes('&', textToTranslate));
-                acceptItemMeta.setLore(acceptItemLore);
-            }
-            acceptItemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', getConfig().getString("gui.accept.name")));
-            int acceptItemStackSlot = getConfig().getInt("gui.accept.slot");
-            acceptItemStack.setItemMeta(acceptItemMeta);
-            inventory.setItem(acceptItemStackSlot, acceptItemStack);
-
-            ItemStack rejectItemStack = new ItemStack(Material.getMaterial(getConfig().getString("gui.reject.blockid")));
-            ItemMeta rejectItemMeta = rejectItemStack.getItemMeta();
-            if (!getConfig().getStringList("gui.reject.lore").isEmpty()) {
-                List<String> rejectItemLore = getConfig().getStringList("gui.reject.lore");
-                rejectItemLore.replaceAll(textToTranslate -> ChatColor.translateAlternateColorCodes('&', textToTranslate));
-                rejectItemMeta.setLore(rejectItemLore);
-            }
-            rejectItemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', getConfig().getString("gui.reject.name")));
-            int rejectItemStackSlot = getConfig().getInt("gui.reject.slot");
-            rejectItemStack.setItemMeta(rejectItemMeta);
-            inventory.setItem(rejectItemStackSlot, rejectItemStack);
-
-            player.openInventory(inventory);
-        }
     }
 
     @EventHandler
