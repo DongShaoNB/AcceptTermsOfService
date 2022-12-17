@@ -9,7 +9,8 @@
 
 ## 使用方法
 
-查看配置文件，里面有注释教程，修改完成后重启服务器或使用插件管理器重载ATOS(AcceptTermsOfService)
+查看配置文件，里面有注释教程，修改完成后重启服务器或使用插件管理器重载ATOS(AcceptTermsOfService)  
+（支持Authme检测 如果使用Authme则在玩家登录完成后再弹出GUI显示服务条款）
 
 ------
 
