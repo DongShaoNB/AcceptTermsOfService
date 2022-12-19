@@ -55,6 +55,7 @@ public class AuthmeListener implements Listener {
                 inventory.setItem(terms3ItemStackSlot, terms3ItemStack);
             }
 
+
             ItemStack acceptItemStack = new ItemStack(Material.getMaterial(AcceptTermsOfService.Plugin.getConfig().getString("gui.accept.blockid")));
             ItemMeta acceptItemMeta = acceptItemStack.getItemMeta();
             if (!AcceptTermsOfService.Plugin.getConfig().getStringList("gui.accept.lore").isEmpty()) {
