@@ -31,6 +31,30 @@ public class AuthmeListener implements Listener {
             termsItemStack.setItemMeta(termsItemMeta);
             inventory.setItem(termsItemStackSlot, termsItemStack);
 
+            if (!AcceptTermsOfService.Plugin.getConfig().getStringList("gui.terms-2").isEmpty()) {
+                ItemStack terms2ItemStack = new ItemStack(Material.getMaterial(AcceptTermsOfService.Plugin.getConfig().getString("gui.terms-2.blockid")));
+                ItemMeta terms2ItemMeta = terms2ItemStack.getItemMeta();
+                terms2ItemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', AcceptTermsOfService.Plugin.getConfig().getString("gui.terms-2.name")));
+                List<String> terms2ItemLore = AcceptTermsOfService.Plugin.getConfig().getStringList("gui.terms-2.lore");
+                terms2ItemLore.replaceAll(textToTranslate -> ChatColor.translateAlternateColorCodes('&', textToTranslate));
+                terms2ItemMeta.setLore(terms2ItemLore);
+                int terms2ItemStackSlot = AcceptTermsOfService.Plugin.getConfig().getInt("gui.terms-2.slot");
+                terms2ItemStack.setItemMeta(terms2ItemMeta);
+                inventory.setItem(terms2ItemStackSlot, terms2ItemStack);
+            }
+
+            if (!AcceptTermsOfService.Plugin.getConfig().getStringList("gui.terms-3").isEmpty()) {
+                ItemStack terms3ItemStack = new ItemStack(Material.getMaterial(AcceptTermsOfService.Plugin.getConfig().getString("gui.terms-3.blockid")));
+                ItemMeta terms3ItemMeta = terms3ItemStack.getItemMeta();
+                terms3ItemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', AcceptTermsOfService.Plugin.getConfig().getString("gui.terms-3.name")));
+                List<String> terms3ItemLore = AcceptTermsOfService.Plugin.getConfig().getStringList("gui.terms-3.lore");
+                terms3ItemLore.replaceAll(textToTranslate -> ChatColor.translateAlternateColorCodes('&', textToTranslate));
+                terms3ItemMeta.setLore(terms3ItemLore);
+                int terms3ItemStackSlot = AcceptTermsOfService.Plugin.getConfig().getInt("gui.terms-3.slot");
+                terms3ItemStack.setItemMeta(terms3ItemMeta);
+                inventory.setItem(terms3ItemStackSlot, terms3ItemStack);
+            }
+
             ItemStack acceptItemStack = new ItemStack(Material.getMaterial(AcceptTermsOfService.Plugin.getConfig().getString("gui.accept.blockid")));
             ItemMeta acceptItemMeta = acceptItemStack.getItemMeta();
             if (!AcceptTermsOfService.Plugin.getConfig().getStringList("gui.accept.lore").isEmpty()) {
