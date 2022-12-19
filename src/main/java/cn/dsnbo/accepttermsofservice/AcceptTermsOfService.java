@@ -91,17 +91,17 @@ public final class AcceptTermsOfService extends JavaPlugin implements Listener {
     public void InventoryClickEvent(InventoryClickEvent e) throws IOException {
         if (e.getWhoClicked().getOpenInventory().getTitle().equals(ChatColor.translateAlternateColorCodes('&', getConfig().getString("gui.title")))) {
             e.setCancelled(true);
-        }
-        Player p = (Player) e.getWhoClicked();
-        if (e.getRawSlot() == getConfig().getInt("gui.accept.slot")) {
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Message.getString("prefix") + Message.getString("accept")));
-            playerHashSet.add(p);
-            p.closeInventory();
-            playerHashSet.remove(p);
-            writeData(String.valueOf(p.getUniqueId()), true);
-        } else if (e.getRawSlot() == getConfig().getInt("gui.reject.slot")) {
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Message.getString("prefix") + Message.getString("reject")));
-            p.kickPlayer(ChatColor.translateAlternateColorCodes('&', Message.getString("reject")));
+            Player p = (Player) e.getWhoClicked();
+            if (e.getRawSlot() == getConfig().getInt("gui.accept.slot")) {
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Message.getString("prefix") + Message.getString("accept")));
+                playerHashSet.add(p);
+                p.closeInventory();
+                playerHashSet.remove(p);
+                writeData(String.valueOf(p.getUniqueId()), true);
+            } else if (e.getRawSlot() == getConfig().getInt("gui.reject.slot")) {
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', Message.getString("prefix") + Message.getString("reject")));
+                p.kickPlayer(ChatColor.translateAlternateColorCodes('&', Message.getString("reject")));
+            }
         }
     }
 
