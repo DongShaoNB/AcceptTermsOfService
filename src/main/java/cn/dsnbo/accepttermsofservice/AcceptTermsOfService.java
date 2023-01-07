@@ -33,6 +33,7 @@ public final class AcceptTermsOfService extends JavaPlugin implements Listener {
     public static FileConfiguration DataF;
     public final Set<Player> playerHashSet = new HashSet<>();
     public boolean isAuthmeEnabled;
+    public boolean isItemsAdderEnabled;
 
 
     @Override
@@ -41,8 +42,11 @@ public final class AcceptTermsOfService extends JavaPlugin implements Listener {
         loadCommand();
         Plugin = AcceptTermsOfService.getProvidingPlugin(AcceptTermsOfService.class);
         isAuthmeEnabled = !(Bukkit.getPluginManager().getPlugin("Authme") == null);
+        isItemsAdderEnabled = !(Bukkit.getPluginManager().getPlugin("ItemsAdder") == null);
         if (isAuthmeEnabled) {
             Bukkit.getPluginManager().registerEvents(new AuthmeListener(), this);
+        } else if (isItemsAdderEnabled) {
+            Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), this);
         } else {
             Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
         }
