@@ -45,8 +45,10 @@ public final class AcceptTermsOfService extends JavaPlugin implements Listener {
         isItemsAdderEnabled = !(Bukkit.getPluginManager().getPlugin("ItemsAdder") == null);
         if (isAuthmeEnabled) {
             Bukkit.getPluginManager().registerEvents(new AuthmeListener(), this);
-        } else if (isItemsAdderEnabled) {
+        } else if (isItemsAdderEnabled || getConfig().getInt("mode") == 1) {
             Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), this);
+        } else if (getConfig().getInt("mode") == 0){
+            Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
         } else {
             Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
         }
