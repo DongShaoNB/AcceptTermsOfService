@@ -11,17 +11,19 @@ import java.io.File;
 
 import static org.bukkit.Bukkit.getLogger;
 
+/**
+ * @author DongShaoNB
+ */
 public class MainCommand implements CommandExecutor {
 
-    public YamlConfiguration Message;
-    public String Prefix;
+    public YamlConfiguration message;
+    public String prefix;
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        File MessageFile = new File(AcceptTermsOfService.Plugin.getDataFolder(), "message.yml");
-        Message = YamlConfiguration.loadConfiguration(MessageFile);
-        Prefix = Message.getString("prefix");
-
+        File messageFile = new File(AcceptTermsOfService.Plugin.getDataFolder(), "message.yml");
+        message = YamlConfiguration.loadConfiguration(messageFile);
+        prefix = message.getString("prefix");
         if (sender instanceof Player) {
             if (sender.hasPermission("atos.admin")){
                 PlayerCommand((Player) sender, args);
@@ -42,11 +44,11 @@ public class MainCommand implements CommandExecutor {
         } else {
             switch (Args[0]) {
                 case "version":
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix) + ChatColor.GREEN + " 当前版本: " + AcceptTermsOfService.Version);
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix) + ChatColor.GREEN + " 当前版本: " + AcceptTermsOfService.Version);
                     break;
                 case "reload":
                     AcceptTermsOfService.Plugin.reloadConfig();
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix) + ChatColor.translateAlternateColorCodes('&', Message.getString("reload")));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix) + ChatColor.translateAlternateColorCodes('&', message.getString("reload")));
                     break;
                 case "help":
                 default:
